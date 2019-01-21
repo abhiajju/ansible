@@ -1,0 +1,9 @@
+---
+  - hosts: webserver #group in iventory file to be mentioned here  -- can also mention a specific ip 
+#   now write everything right under hosts
+#   now we can mention list of all modules that we want to assign to the target group
+    tasks:
+      - yum: name=httpd state=present
+      - service:    
+      - copy: 
+      - shell: 

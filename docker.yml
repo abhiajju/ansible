@@ -1,0 +1,12 @@
+---
+ - hosts: rhel
+   remote_user: root
+   tasks:
+    - name: creating   container 
+      docker_container:
+       name: "container{{ item }}"
+       image: centos
+       detach: true 
+       
+    
+      with_sequence: count=6
