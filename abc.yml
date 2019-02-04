@@ -1,0 +1,8 @@
+---
+ - hosts: abhipap
+   tasks:
+    - name: inst
+      yum:
+       name: gedit
+       state: present
+    

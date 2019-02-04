@@ -1,0 +1,12 @@
+---
+ - hosts: localhost
+   tasks:
+    - user:
+       name: "{{ item }}"
+       state: absent
+      with_items: 
+       - marry1
+       - larry1
+       - carry1
+       - harry1 
+              

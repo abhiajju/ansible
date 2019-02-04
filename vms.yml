@@ -1,0 +1,17 @@
+---
+ - hosts: localhost
+   tasks: 
+    - name: listing vm
+      virt:
+       command: list_vms
+      list_vms:
+       description: The list of vms defined on the remote system
+       type: dictionary
+       returned: success
+       sample: [
+           "build.example.org",
+           "dev.example.org"
+       ]
+       
+      
+

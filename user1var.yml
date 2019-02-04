@@ -1,0 +1,13 @@
+staff: 
+ - natasha1
+ - natasha2
+ - natasha3
+
+webhosts:
+ - q1
+ - q2
+ - q3
+
+revoked:
+ - natasha1
+ - q1

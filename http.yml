@@ -1,0 +1,8 @@
+---
+ - hosts: taani
+   name: installing httpd
+   tasks:
+    - name: starting httpd service
+      service: name=httpd state=restarted enabled=yes
+    - name: copying content
+      copy: content="helloonce again ajju" force=no dest=/var/www/html/index.html

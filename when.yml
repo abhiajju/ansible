@@ -1,0 +1,9 @@
+---
+ - hosts: localhost
+   gather_facts: no
+   tasks: 
+    - yum: name=httpd state=present
+      when: ansible_distribution="RedHat"
+    - apt: name=apache2 state=present
+      when: ansible_distribution="Kali GNU/Linux"
+

@@ -1,0 +1,11 @@
+---
+ - hosts: localhost
+   vars:
+    x:
+     - jain
+     - karan
+     - simu
+   tasks: 
+    - user: 
+       name: "{{ item }}"
+      with_items: "{{x}}"

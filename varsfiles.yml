@@ -1,0 +1,9 @@
+---
+ - hosts: localhost
+   vars_files:
+    - qw.yml
+   tasks:
+    - yum: name={{ item }}
+      with_items:
+       - "{{x}}"
+       - "{{y}}"

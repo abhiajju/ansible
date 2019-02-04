@@ -1,0 +1,12 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: adding users and assigining them in a group
+      user:
+       name: "{{ item.name }}"
+       state: present
+       groups:  "{{ item.groups }}"
+      with_items:
+       - {name: 'raj', groups: 'root'}
+       - {name: 'roahn', groups: 'wheel'}
+       - {name: 'rajesh', groups: 'bin'}

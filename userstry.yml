@@ -1,0 +1,10 @@
+---
+ - hosts: localhost
+   tasks:
+    - user:
+       name: "{{ item.name }}"
+       uid: "{{ item.id }}"
+      with_items: 
+       - {name: "marry1", id: "4001"}
+       - {name: "larry1", id: "3999"}
+              

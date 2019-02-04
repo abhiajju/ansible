@@ -1,0 +1,32 @@
+---
+ - hosts: localhost
+   vars_files: 
+    - user1var.yml
+   tasks:
+    - name: creating groups
+      group:
+       name: "{{ item }}"
+      with_items:
+       - staff 
+       - webhosts
+       - guests
+    - name: creating users for staff
+      user:
+       name: "{{ item }}" 
+       groups: staff,webhosts
+      with_items:
+       - "{{staff}}"
+    - name: creating user for webhosts
+      user:
+       name: "{{ item }}"
+       groups: webhosts,guests
+      with_items:
+       - "{{webhosts}}"
+    - name: deleting user of revoked
+      user:
+       name: "{{ item }}"
+       state: absent
+      with_items:
+       - "{{revoked}}"
+
+

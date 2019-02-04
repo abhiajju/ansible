@@ -1,0 +1,10 @@
+---
+ - hosts: taani
+   name: using lineinfile
+   tasks:
+    - name: disbale selinux
+      lineinfile: 
+       path: /etc/selinux/config 
+       regexp: '^SELINUX=' 
+       line: 'SELINUX=permissive'
+
