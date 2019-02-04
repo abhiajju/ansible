@@ -1,0 +1,12 @@
+---
+ - hosts: localhost
+   tasks: 
+    - name: define vm
+      virt:
+       name: rhvm1.qcow2
+       command: create
+    - name: start vm
+      virt:
+       name: rhvm1.qcow2
+       state: running
+

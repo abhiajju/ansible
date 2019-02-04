@@ -1,0 +1,11 @@
+---
+ - hosts: localhost
+   vars: 
+    x: httpd
+    y: vsftpd
+   tasks: 
+    - yum: name={{ item }} state=present
+      with_items: 
+       - "{{x}}"
+       - "{{y}}"
+   
