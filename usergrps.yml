@@ -1,5 +1,10 @@
 ---
  - hosts: localhost
+   vars:
+    x:
+     - raj
+     - roahn
+     - rajesh
    tasks:
     - name: adding users and assigining them in a group
       user:
@@ -7,6 +12,14 @@
        state: present
        groups:  "{{ item.groups }}"
       with_items:
-       - {name: 'raj', groups: 'root'}
-       - {name: 'roahn', groups: 'wheel'}
-       - {name: 'rajesh', groups: 'bin'}
+       - {name: raj, groups: root}
+       - {name: roahn, groups: wheel}
+       - {name: rajesh, groups: bin}
+    - name: removing above users
+      user:
+       name: "{{ item }}"
+       state: absent
+      with_items:
+       - "{{x}}"
+      tags:
+       - remove 

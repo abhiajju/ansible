@@ -1,6 +1,8 @@
 ---
- - hosts: target
+ - hosts: localhost
    tasks: 
     - yum: name=httpd state=present
-    - copy: content={{ ansible_default_ipv4.address }}   dest=/var/www/html/index.html
+    - copy: 
+       content: "{{ ansible_default_ipv4.address }}"   
+       dest: /var/www/html/indexxx.html
 
