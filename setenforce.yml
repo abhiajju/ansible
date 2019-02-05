@@ -1,0 +1,10 @@
+---
+ - hosts: localhost
+   gather_facts: no
+   name: enabling setenforce
+   tasks:
+    - name: changing setenforce value in file
+      lineinfile:
+       path: /etc/selinux/config
+       regexp: '^SELINUX='
+       line: 'SELINUX=enforcing'

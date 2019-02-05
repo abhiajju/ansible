@@ -1,0 +1,23 @@
+---
+ - hosts: localhost
+   gather_facts: no
+   name: practising of copy module and changing group ,owner ,file permissions
+   tasks:
+    - name: copying one file to a destination and changing owner,group
+      copy:
+       src: /root/Desktop/ab 
+       dest: /root/Downloads/
+       owner: abhi
+       group: manager
+       mode: 0644
+    - name: changing file permissions
+      shell: chmod 777 ab
+      args:
+       chdir: /root/Desktop
+      tags:
+       - shell
+    - name: changing group and owner
+      shell: chown root /root/Downloads/ab 
+      tags:
+       - owner 
+      

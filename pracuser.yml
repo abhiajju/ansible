@@ -1,0 +1,18 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: group creation
+      group:
+       name: manager
+
+    - name: user creations with ids and shells
+      user:
+       name: "{{ item.name }}"
+       groups: "{{ item.group }}"
+       password: abhi
+       shell: "{{ item.shell }}"
+      with_items:
+       - {name: harry, group: manager, shell: /bin/bash}
+       - {name: natasha, group: manager, shell: /bin/bash}
+       - {name: jain, group: manager, shell: /sbin/nologin}
+       

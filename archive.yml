@@ -1,0 +1,30 @@
+---
+ - hosts: localhost
+   gather_facts: no
+   name: practising archive module -- ansible never creates tar of empty file
+   tasks:
+    - name: creating a tar file
+      archive:
+       path: /root/abd
+       dest: /root/abd.tar
+       format: tar
+      tags:
+       - tarcreate
+
+    - name: creating tar from multiple files
+      archive:
+       path: 
+        - /root/abd
+        - /root/abde
+       dest: /root/Desktop/ab.tar.gz
+       format: gz
+      tags:
+       - multigz
+    
+    - name: adding to an existing tar
+      archive:
+       path: /root/abde
+       dest: /root/abd.tar
+       format: tar
+      tags:
+       - update  
