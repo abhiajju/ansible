@@ -1,0 +1,22 @@
+---
+ - hosts: ansible
+   name: changing netwrok scripts file of eth0 in vm
+   tasks:
+    - name: changing dynamic to static and onboot to yes
+      lineinfile:
+       path: /etc/sysconfig/network-scripts/ifcfg-eth0
+       regexp: '^BOOTPROTO='
+       line: 'BOOTPROTO="static"'
+    - lineinfile:
+       path: /etc/sysconfig/network-scripts/ifcfg-eth0
+       regexp: '^ONBOOT='
+       line: 'ONBOOT="yes"'
+    - name: now adding dns,netmask and other info using blockinfile
+      blockinfile:
+       path: /etc/sysconfig/network-scripts/ifcfg-eth0
+       block: |
+        DNS 192.168.1.1
+        NETMASK 255.255.255.0
+        GATEWAY 192.168.1.1
+      tags:
+       - block
