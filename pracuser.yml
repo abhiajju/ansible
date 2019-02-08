@@ -4,12 +4,11 @@
     - name: group creation
       group:
        name: manager
-
     - name: user creations with ids and shells
       user:
        name: "{{ item.name }}"
        groups: "{{ item.group }}"
-       password: abhi
+       password: $6$rounds=656000$mysecretsalt$.eNM1ZJfq/ia987d11Zo4PGvKRbL7zwWqsxKBpLGGtTmt8bqmWECBvMYHW8grUoSYqkuFLLQjyWzti3fUvMKy/
        shell: "{{ item.shell }}"
       with_items:
        - {name: harry, group: manager, shell: /bin/bash}

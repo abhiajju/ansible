@@ -1,0 +1,12 @@
+---
+ - hosts: localhost
+   gather_facts: no
+   ignore_errors: yes
+   tasks: 
+    - yum: 
+       name: dfg
+       state: present
+      register: x
+    - debug:
+       var: x
+      when: x.failed == true

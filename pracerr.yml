@@ -1,0 +1,29 @@
+---
+ - hosts: localhost
+   ignore_errors: yes
+   gather_facts: no
+   name: practising error
+   tasks:
+    - name: installing a wrong service
+      yum:
+       name: ekt23
+       state: present
+      register: x
+    - debug:
+       var: x
+    - debug:
+       var: installing failed
+      when: x.failed ==  true
+    - name: restarting service
+      service:
+       name: ekt23
+       state: started
+      register: y
+    - debug:
+       var: y
+    - debug:
+       msg: starting failed
+      when: y.failed == true
+    - debug: 
+       msg: playbook was unsuccessful
+      when: x.failed== true or y.failed == true

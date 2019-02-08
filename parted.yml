@@ -16,8 +16,8 @@
        device: /dev/vda
        state: present
        number: 7
-       part_start: 6535MB
-       part_end: 6735MB
+       part_start: 6383617KB
+       part_end: 6384639KB
        part_type: logical
       register: create
       tags:

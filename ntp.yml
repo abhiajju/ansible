@@ -1,0 +1,26 @@
+---
+ - hosts: ansible
+   name: configuring ntpd
+   tasks:
+    - name: installing ntp
+      yum: 
+       name: ntp
+    - name: restart ntp service
+      lineinfile:
+       path: /etc/rc.local
+       line: systemctl restart ntpd
+    - name: give rc.local permission to execute
+      shell: chmod +x /etc/rc.local
+    - name: editing ntp conf file
+      lineinfile:
+       path: /etc/ntp.conf
+       insertafter: 'server 3'
+       line: server www.friends.com
+      tags:
+       - abhi
+    - name: restarting ntp service
+      service:
+       name: ntpd
+       state: restarted
+      tags:
+       - start 

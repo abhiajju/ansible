@@ -1,0 +1,21 @@
+---
+ - hosts: localhost
+   name: practising crontab module
+   tasks:
+    - name: installing crond
+      yum:
+       name: cronie
+    - name: restarting cron services
+      service:
+       name: crond
+       state: restarted
+       enabled: yes
+    - name: job scheduling using cron
+      cron:
+       name: "a job to print something"
+       minute: "33"
+       hour: "18"
+       job: "echo abcd > /root/abc.txt"
+      tags:
+       - cron
+    

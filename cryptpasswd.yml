@@ -1,0 +1,22 @@
+---
+ - hosts: localhost
+   name: crypted password
+   gather_facts: no
+   tasks:
+    - name: debug use
+      debug: "msg={{ 'taani' | password_hash('sha512', 'mysecretsalt') }}"
+      register: y
+    - debug:
+       var: y
+    - name: user creations with ids and shells
+      user:
+       name: tani
+       password: "{{y.msg}}"
+
+
+
+
+
+
+
+
