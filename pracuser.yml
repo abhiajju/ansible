@@ -1,5 +1,5 @@
 ---
- - hosts: localhost
+ - hosts: ansible
    tasks:
     - name: group creation
       group:

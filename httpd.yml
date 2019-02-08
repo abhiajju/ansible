@@ -1,0 +1,30 @@
+--- 
+ - hosts: ansible
+   name: http practice
+   tasks:
+    - name: installing httpd
+      yum: 
+       name: httpd
+       state: present
+    - name: enabling httpd service
+      service:
+       name: httpd
+       state: restarted
+       enabled: yes
+    - name: copy conf file from server using get_url
+      get_url:
+       url: http://192.168.10.254/automation/httpd.conf
+       dest: /etc/httpd/conf.d/sample.conf
+    - copy:
+       content: "Adhoc Networks"
+       dest: /var/www/html/index.html
+       create: yes
+    - name: adding content
+      lineinfile:
+       path: /var/www/html/index.html
+       line: Adhoc Networks from {{ansible_hostname}}
+      tags:
+       - line
+
+
+      

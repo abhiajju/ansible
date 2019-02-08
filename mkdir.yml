@@ -1,0 +1,17 @@
+---
+ - hosts: localhost
+   name: making dirs and files
+   tasks:
+    - name: making a dir
+      file:
+       path: /var/index
+       state: directory
+    - name: making file
+      file: 
+       path: /var/index/index.html
+       state: touch
+    - name: downloading something
+      get_url:
+       url: http://192.168.10.254/automation/secure.html
+       dest: /var/index/
+    

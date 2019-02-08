@@ -1,0 +1,14 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: replacing a line in conf file of httpd 
+      replace: 
+       path: /etc/httpd/conf/httpd.conf
+       regexp: "AllowOverRide None"
+       replace: "AllowOverRide AuthConfig"
+    - name: need to restart service
+      service: 
+       name: httpd
+       state: restarted
+       enables: yes
+     

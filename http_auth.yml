@@ -1,0 +1,57 @@
+---
+ - hosts: ansible
+   gather_facts: no
+   name: authenticating http
+   tasks:
+    - name: configuring yum
+      yum_repository:
+       name: http
+       description: yum repo
+       baseurl: ftp://192.168.10.254/pub/rhel7/
+       gpgcheck: no
+    - name: downloading httpd
+      yum:
+       name: httpd
+       state: present
+      tags:
+       - httpd
+    - name: copying an index file
+      copy:
+       content: "hii abhi"
+       dest: /var/www/html/index.html
+    - name: starting httpd service
+      service: 
+       name: httpd
+       state: restarted
+       enabled: yes
+    - name: making a directory inside html
+      file:
+       path: /var/www/html/protected
+       state: directory
+       mode: 0755
+       owner: apache
+      tags:
+       - file
+    - name: downloading files htaccess and htpasswd
+      get_url:
+       url: http://192.168.10.254/automation/htaccess
+       dest: /var/www/html/protected/.htaccess
+    - get_url:
+       url: http://192.168.10.254/automation/htpasswd
+       dest: /var/www/html/protected/.htpasswd
+      tags:
+       - htaccess
+    - name: replacing a line in config file of httpd
+      replace:
+       path: /etc/httpd/conf/httpd.conf
+       regexp: "AllowOverride None"
+       replace: "AllowOverride AuthConfig"
+      tags:
+       - conf
+    - name: service restart
+      service:
+       name: httpd
+       state: restarted 
+      tags:
+       - restart
+

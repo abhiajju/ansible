@@ -1,0 +1,27 @@
+---
+ - hosts: ansible
+   gather_facts: no
+   name: working on partitions using parted module
+   tasks:
+    - name: gathering info of fdisk
+      parted:
+       device: /dev/vda
+       state: info
+      register: sdb_info
+    - name: printing info gathered from above using debug
+      debug:
+       var: sdb_info
+    - name: creating a partition
+      parted:
+       device: /dev/vda
+       state: present
+       number: 7
+       part_start: 6535MB
+       part_end: 6735MB
+       part_type: logical
+      register: create
+      tags:
+       - created
+    - debug:
+       var: create  
+  
