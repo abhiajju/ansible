@@ -1,0 +1,9 @@
+---
+ - hosts: localhost
+   name: using find module to find all files of a specific user
+   tasks:
+    - name: find module
+      shell: find /home/abhi -user abhi -exec cp -rvf { }  /root/abd.txt \;
+      register: x
+    - debug:
+       var: x

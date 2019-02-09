@@ -15,13 +15,19 @@
       parted:
        device: /dev/vda
        state: present
-       number: 7
-       part_start: 6383617KB
-       part_end: 6384639KB
+       number: 8
+       part_start: 6839MiB
+       part_end: 7139MiB
        part_type: logical
       register: create
       tags:
        - created
     - debug:
-       var: create  
-  
+       var: create 
+    - name: deleting partition
+      parted:
+       device: /dev/vda
+       state: absent
+       number: 7
+      tags:
+       - remove 

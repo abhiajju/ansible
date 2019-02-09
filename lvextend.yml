@@ -5,17 +5,28 @@
     - name: creating a volume group
       lvg:
        vg: ansiblevg
-       pvs: /dev/vda5
-    
+       pvs: /dev/vda5 
     - name: extending lvm 
       lvol:
        vg: ansiblevg
        lv: ansiblelv
        size: 100m
-    - name: extending lvm 
+    - name: formatting lvm with a file system
+      filesystem:
+       fstype: ext3
+       dev: /dev/mapper/ansiblevg-ansiblelv
+    - name: extending lvm to 180mb
       lvol:
        vg: ansiblevg
        lv: ansiblelv
-       size: 190m
+       size: 180m
       tags:
-       - abc
+       - extend
+    - name: online formatting can only be done if drive is mounted 
+      filesystem:
+       fstype: ext3
+       dev: /dev/mapper/ansiblevg-ansiblelv
+       resizefs: yes
+      tags:
+       - resize
+     

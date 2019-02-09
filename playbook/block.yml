@@ -1,0 +1,12 @@
+---
+ - hosts: localhost
+   name: exam prac of block rescue
+   tasks:
+    - block:
+       - copy:
+          src: /etc/examhost
+          dest: /var/index.html
+      rescue:
+       - copy:
+          content: you have to copy it manually
+          dest: /var/index.html

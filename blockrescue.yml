@@ -1,0 +1,15 @@
+---
+ - hosts: localhost
+   name: studying block and rescue
+   tasks:
+    - name: we will make blocks just like modules
+      block:
+       - name: we can use modules inside block
+         copy: 
+          src: /root/Desktop/abc
+          dest: /root/Desktop/abdef
+      rescue:
+       - copy: 
+          src: /root/Desktop/ab
+          dest: /root/Desktop/abce
+

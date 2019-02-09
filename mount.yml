@@ -1,0 +1,28 @@
+---
+ - hosts: ansible
+   name: mounting and unmounting a drive
+   tasks:
+    - name: creating a mount point
+      file: 
+       path: /mnt/ansible
+       state: directory
+      tags:
+       - dir
+    - name: mounting a drive 
+      mount:
+       path: /mnt/ansiblelv
+       src: /dev/mapper/ansiblevg-ansiblelv
+       opts: rw
+       state: mounted
+       fstype: ext3
+       boot: yes
+      tags:
+       - mount
+    - name: unmounting the drive 
+      mount:
+       path: /mnt/ansiblelv
+       src: /dev/mapper/ansiblevg-ansiblelv
+       fstype: ext3
+       state: absent
+      tags:
+       - umount

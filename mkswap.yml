@@ -1,0 +1,23 @@
+---
+ - hosts: ansible
+   name: making swap partition and mounting it 
+   tasks:
+    - name: creating a swap partition
+      shell: mkswap /dev/vda6
+    - name: online formatting with swapon
+      shell: swapon /dev/vda6
+    - name: making swap persistent
+      lineinfile:
+       path: /etc/fstab
+       line: /dev/vda6          swap    swap    defaults   0  0
+    - name: unmounting swap partition
+      shell: swapoff /dev/vda6
+      tags:
+       - umount
+    - name: checking swap entry in fstab
+      shell: mount -a 
+      register: a
+    - debug:
+       var: a
+      tags:
+        - debug

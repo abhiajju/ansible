@@ -1,0 +1,30 @@
+---
+ - hosts: localhost
+   name: configuring autofs through ansible
+   tasks:
+    - name: installing autofs through yum
+      yum:
+       name: autofs
+       state: present
+      tags:
+       - install
+    - name: restarting autofs service
+      service:
+       name: autofs
+       state: restarted
+       enabled: yes
+      tags:
+       - service
+    - name: editing /etc/auto.master file through line in file
+      lineinfile:
+       path: /etc/auto.master
+       regexp: '^/misc'
+       line: '/home/guests     /etc/auto.misc'
+      tags:
+       - master
+    - name: editing /etc/auto.misc file through lineinfile
+      lineinfile:
+       path: /etc/auto.misc
+       line: ldapuser1  -fstype=nfs,rw,vers=3   adhoc.example.com:/home/guests/ldapuser1
+      tags:
+       - misc
