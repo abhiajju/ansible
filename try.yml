@@ -1,0 +1,6 @@
+---
+ - hosts: localhost
+   gather_facts: no
+   name: trying something
+   tasks:
+    - debug: msg="helllo"

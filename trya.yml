@@ -1,0 +1,13 @@
+---
+ - hosts: localhost
+   gather_facts: no
+   tasks:
+    - shell: ./tryi.sh
+      register: y
+    - debug:
+       var: y.stdout_lines[ {{item}} ]
+      with_items:
+       - 5
+       - 16
+       - 27
+ 

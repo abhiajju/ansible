@@ -1,0 +1,64 @@
+---
+ - hosts: localhost
+   name: peforming ldap authentication 
+   tasks:
+    - name: installing ntp
+      yum: 
+       name: ntp
+       state: present
+    - name: editing ntp configuration file /etc/ntp.conf
+      lineinfile:
+       path: /etc/ntp.conf
+       regexp: "{{ item }}"
+       line: ''
+      with_items:
+       - server
+       - server
+       - server
+     
+    - name: adding a new line in /etc/ntp.conf
+      lineinfile:
+       path: /etc/ntp.conf
+       regexp: server
+       line: server     adhoc.example.com
+      tags:
+       - ntp
+    - name: restarting ntp service
+      service: 
+       name: ntpd
+       state: restarted
+    - name: enabling ntp service
+      lineinfile:
+       path: /etc/rc.local
+       line: systemctl restart ntpd
+    - name: giving execution permission to rc.local
+      shell: chmod +x /etc/rc.local
+    - name: installing autofs
+      yum:
+       name: autofs
+       state: latest
+    - name: editing autofs config files
+      lineinfile:
+       path: /etc/auto.misc
+       line: ldapuser1  -fstype=nfs,rw,vers=3   adhoc.example.com:/home/guests/ldapuser1
+    - name: editing /etc/auto.master file
+      lineinfile:
+       path: /etc/auto.master
+       regexp: '^/misc'
+       line: /home/guests      /etc/auto.misc
+    - name: restarting and enabling autofs service
+      service:
+       name: autofs
+       state: restarted
+       enabled: yes
+    - name: now starting with ldap 
+      yum:
+       name: authconfig-gtk
+       state: present
+      tags:
+       - ldap
+    - name: connecting through ldap
+      ldap_entry:
+       dn: dc=example,dc=com
+       server_uri: ldap://station205.example.com
+       start_tls: yes

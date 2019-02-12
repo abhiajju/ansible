@@ -1,0 +1,13 @@
+---
+ - hosts: nfs
+   name: practice nfs service through infini_export module
+   tasks:
+    - name: infini_export for nfs
+      infini_export:
+       name: /var/ajju
+       system: 192.168.10.44
+       filesystem: nfs
+       state: present 
+       user: root
+       password: $6$eb5rBbHkYnTtBOab$rUEe6bAc9SvOZY6oVsATQVr14.N1JalGkLCLczZWinUQvamSM4p4wpl16hRzBeHuR/MgU70w2CjAkuUe4efMf1
+       

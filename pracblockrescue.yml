@@ -1,0 +1,12 @@
+---
+ - hosts: localhost
+   ignore_errors: yes
+   tasks:
+    - block:
+       - copy:
+          src: /root/Desktop/any
+          dest: /root/Desktop/anny
+      rescue:
+       - copy:
+          src: /root/Desktop/index.html
+          dest: /root/Desktop/ann

@@ -45,3 +45,19 @@
 [ansible]
 192.168.122.147
 
+[nfs]
+192.168.10.44
+
+[nodes]
+node1
+node2
+node3
+node4
+
+[production]
+node1
+node2
+
+[backup]
+node3
+node4
