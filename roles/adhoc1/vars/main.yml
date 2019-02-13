@@ -1,0 +1,16 @@
+---
+ staff: 
+  - natasha
+  - n1
+  - n2
+  - n3
+
+ guests: 
+  - a
+  - b
+  - c
+  - d
+
+ revoked: 
+  - a
+  - natasha

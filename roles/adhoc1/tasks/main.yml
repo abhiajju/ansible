@@ -1,0 +1,17 @@
+---
+# tasks file for adhoc
+ - user:
+    name: "{{item}}"
+   with_items:
+    - "{{staff}}"
+
+ - user:
+    name: "{{item}}"
+   with_items:
+    - "{{guests}}"
+ - user:
+    name: "{{item}}"
+    state: absent
+   with_items:
+    - "{{revoked}}"
+    
