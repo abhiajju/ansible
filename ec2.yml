@@ -1,0 +1,36 @@
+---
+ - hosts: localhost
+   name: automating ec2 with ansible
+   tasks:
+    - name: creating security group with ingress rules
+      ec2_group:
+       name: ansiblesg
+       description: trying something
+       rules:
+        - proto: tcp
+          ports:
+           - 80
+           - 22
+           - 53
+          cidr_ip: 0.0.0.0/0
+      register: x
+    - name: launching a new ec2 instance
+      ec2:
+       count: 1
+       group_id: "{{x.group_id}}"
+       image: ami-5b673c34
+       instance_type: t2.micro
+       keypair: awskey
+       termination_protection: yes
+       ec2_region: ap-south-1
+       vpc_subnet_id: 
+      register: y
+    - debug:
+       var: y.instances[0].id
+    - name: gathering facts about instance
+      ec2_instance_facts:
+       instance_ids:
+        - "{{y.instances[0].id}}"
+      register: z
+    - debug:
+       var: z

@@ -1,5 +1,5 @@
 ---
- - hosts: ansible
+ - hosts: node1
    gather_facts: no
    name: working on partitions using parted module
    tasks:
@@ -15,7 +15,7 @@
       parted:
        device: /dev/vda
        state: present
-       number: 8
+       number: 
        part_start: 6839MiB
        part_end: 7139MiB
        part_type: logical
